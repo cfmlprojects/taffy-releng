@@ -38,7 +38,7 @@
 	
         <!-- add the extension as well -->
 		<mvn-put artifact="${extension.dist}/${extension.archive}"
-			packaging="zip" repoId="${target.repo.id}" groupId="cfml.extensions"
+			packaging="zip" repoId="${mvn.repo.id}" groupId="cfml.extensions"
 			artifactId="taffy" version="${extension.version}" />
 
 	</target>
