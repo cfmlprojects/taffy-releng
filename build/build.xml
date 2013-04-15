@@ -1,0 +1,31 @@
+<project name="distro.build" default="build" basedir="./" xmlns:antcontrib="antlib:net.sf.antcontrib">
+
+	<loadproperties srcfile="build.properties"/>
+	<import file="${cfdistro.build.file}"/>
+
+	<target name="build" depends="cfdistro.build">
+		<mapping physical="@src.dir@/Taffy" virtual="/Taffy"/>
+		<servlet-mapping physical="@src.dir@/Taffy/tests/index.cfm" virtual="/Taffy/tests/index.cfm/*"/>
+		<mapping physical="@war.target.dir@/WEB-INF/lib/railo-server" virtual="/WEB-INF/lib/railo-server"/>
+	</target>	
+
+	<target name="build.mvn.deploy" depends="project.update, build, mxunit.tests.run">
+	    <property name="mvn.repo.dest" value="local" />
+	    <property name="mvn.repo.dest" value="remote" />
+	    <property name="mvn.repo.id" value="mvn.repo.${mvn.repo.dest}" />
+	    <property name="maven.repo.local" location="${cfdistro.basedir}/artifacts" />
+		<mvn-repo id="mvn.repo.local" url="file://${maven.repo.local}/" />
+	   	<property name="mvn.type" value="release" />
+
+	   	<delete file="${dist.dir}/taffy.zip" />
+	   	<delete file="${dist.dir}/taffy-all.zip" />
+		<zip destfile="${dist.dir}/taffy.zip" basedir="${src.dir}" excludes="Taffy/tests/** Taffy/lib/** Taffy/snippets/** Taffy/examples/**" />
+		<zip destfile="${dist.dir}/taffy-all.zip" basedir="${src.dir}" includes="Taffy/**" />
+
+		<pom-and-deploy pomid="taffy.pom" packaging="zip" artifact="${dist.dir}/taffy.zip"
+		 groupId="org.riaforge" artifactId="taffy" version="1.3" name="taffy"/>
+		<pom-and-deploy pomid="taffy.pom" packaging="zip" artifact="${dist.dir}/taffy-all.zip"
+		 groupId="org.riaforge" artifactId="taffy-all" version="1.3" name="taffy"/>
+	</target>
+		
+</project>
