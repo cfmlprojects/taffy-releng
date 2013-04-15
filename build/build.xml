@@ -9,7 +9,7 @@
 		<mapping physical="@war.target.dir@/WEB-INF/lib/railo-server" virtual="/WEB-INF/lib/railo-server"/>
 	</target>	
 
-	<target name="build.mvn.deploy" depends="project.update, build, mxunit.tests.run">
+	<target name="build.mvn.release" depends="project.update, build, mxunit.tests.run">
 	    <property name="mvn.repo.dest" value="local" />
 	    <property name="mvn.repo.dest" value="remote" />
 	    <property name="mvn.repo.id" value="mvn.repo.${mvn.repo.dest}" />
@@ -26,6 +26,24 @@
 		 groupId="org.riaforge" artifactId="taffy" version="1.3" name="taffy"/>
 		<pom-and-deploy pomid="taffy.pom" packaging="zip" artifact="${dist.dir}/taffy-all.zip"
 		 groupId="org.riaforge" artifactId="taffy-all" version="1.3" name="taffy"/>
+		
+	 	<!--  create an extension -->
+		<delete dir="${basedir}/extensionbase/" />
+		<mkdir dir="${basedir}/extensionbase/" />
+		<copy todir="${basedir}/extensionbase/applications/Taffy">
+			<fileset dir="${src.dir}/Taffy" />
+		</copy>
+		<antcontrib:runtarget target="extension.build" />
+		<delete dir="${basedir}/extensionbase/" />
+	
+        <!-- add the extension as well -->
+		<mvn-put artifact="${extension.dist}/${extension.archive}"
+			packaging="zip" repoId="${target.repo.id}" groupId="cfml.extensions"
+			artifactId="taffy" version="${extension.version}" />
+
 	</target>
+
+
+
 		
 </project>
