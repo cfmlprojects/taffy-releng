@@ -19,8 +19,8 @@
 
 	   	<delete file="${dist.dir}/taffy.zip" />
 	   	<delete file="${dist.dir}/taffy-all.zip" />
-		<zip destfile="${dist.dir}/taffy.zip" basedir="${src.dir}" excludes="Taffy/tests/** Taffy/lib/** Taffy/snippets/** Taffy/examples/**" />
-		<zip destfile="${dist.dir}/taffy-all.zip" basedir="${src.dir}" includes="Taffy/**" />
+		<zip destfile="${dist.dir}/taffy.zip" basedir="${src.dir}/Taffy" excludes="tests/** lib/** snippets/** examples/**" />
+		<zip destfile="${dist.dir}/taffy-all.zip" basedir="${src.dir}/Taffy" includes="**" />
 
 		<pom-and-deploy pomid="taffy.pom" packaging="zip" artifact="${dist.dir}/taffy.zip"
 		 groupId="com.fusiongrokker" artifactId="taffy" version="1.3" name="taffy"/>
