@@ -6,6 +6,6 @@
  -->
 <mapping physical="./../src" virtual="/"/>
 <mapping physical="@war.target.dir@/WEB-INF/lib/railo-server" virtual="/WEB-INF/lib/railo-server"/>
-<mapping physical="@ext.mappings.dir@/org.mxunit/core/2.1.3/mxunit" virtual="/mxunit"/>
+<mapping physical="@ext.mappings.dir@/org.mxunit/core/2.1.3" virtual="/mxunit"/>
 <mapping physical="@src.dir@/Taffy" virtual="/Taffy"/>
 </mappings>
