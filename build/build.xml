@@ -4,6 +4,7 @@
 	<import file="${cfdistro.build.file}"/>
 
 	<target name="build" depends="cfdistro.build">
+		<dependency groupId="org.riaforge" artifactId="hoth" version="1.0" mapping="/Hoth" />
 		<mapping physical="@src.dir@/Taffy" virtual="/Taffy"/>
 		<servlet-mapping physical="@src.dir@/Taffy/tests/index.cfm" virtual="/Taffy/tests/index.cfm/*"/>
 		<mapping physical="@war.target.dir@/WEB-INF/lib/railo-server" virtual="/WEB-INF/lib/railo-server"/>
